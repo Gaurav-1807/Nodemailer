@@ -12,20 +12,23 @@ var transporter = nodemailer.createTransport({
 });
 
 app.post("/send", (req, res) => {
-    let { email, subject, text } = req.body;
+    let { email, sub, text } = req.body;
     const mailoptions = {
         from: "gauravambaliya77@gmail.com",
-        to: "daksh1or2@gmail.com",
-        subject: "Node.js",
-        text: 'Hello',
+        to: email,
+        subject: sub,
+        text: text,
     }
     transporter.sendMail(mailoptions, function (error, info) {
         if (error) {
-            res.send(error);
+            console.log(error)
         } else {
-            res.send('Email sent: ' + info.response);
+           
+            console.log(info)
         }
+        res.send("done")
     });
+    
 })
 
 
